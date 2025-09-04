@@ -1,16 +1,16 @@
-def chatbot():
-    print("Chatbot is ready! When you Type Exit its Quit.\n")
+import re
 
-    # Pattrens & Responses
-    pattrens = {
-        "hello": "Hi, how can I help you?",
-        "hi": "Hi, how can I help you?",
-        "hey": "Hello! How are you?",
-        "what is your name": "I am your Python Chatbot.",
-        "how are you": "I am just a bot, but I am doing fine!",
-        "bye": "Goodbye! Have a nice day.",
-        "help": "You can ask me about my name, greetings, or how I am.",
-        "thank you": "You're welcome!"      
+def chatbot():
+    print("Chatbot is ready! Type 'exit' to quit.\n")
+
+    # Patterns & Responses (Regex use karenge)
+    patterns = {
+        r"\b(hi|hello|hey)\b": "Hi, how can I help you?",
+        r"\bwhat is your name\b": "I am your Python Chatbot.",
+        r"\bhow are you\b": "I am just a bot, but I am doing fine!",
+        r"\bbye\b": "Goodbye! Have a nice day.",
+        r"\bhelp\b": "You can ask me about my name, greetings, or how I am.",
+        r"\bthank(s| you)\b": "You're welcome!"
     }
 
     while True:
@@ -23,9 +23,9 @@ def chatbot():
             break
 
         matched = False
-        # Keyword matching
-        for pattren, response in pattrens.items():
-            if pattren in user_input:
+        # Regex matching
+        for pattern, response in patterns.items():
+            if re.search(pattern, user_input):
                 print("Bot:", response)
                 matched = True
                 break
@@ -33,5 +33,5 @@ def chatbot():
         if not matched:
             print("Bot: I don't understand.")
 
-# Run the chatbot
+# Run chatbot
 chatbot()
